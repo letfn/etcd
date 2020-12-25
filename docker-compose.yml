@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  etcd:
+    image: defn/etcd
+    command:
+      - --data-dir=/etcd-data
+      - --initial-advertise-peer-urls
+      - http://${ETCD_IP}:2380
+      - --listen-peer-urls
+      - http://0.0.0.0:2380
+      - --advertise-client-urls
+      - http://${ETCD_IP}:2379
+      - --listen-client-urls
+      - http://0.0.0.0:2379
+      - --initial-cluster
+      - default=http://${ETCD_IP}:2380
+      - --logger=zap
+    env_file: .env
+    network_mode: host
+    volumes:
+    - /mnt/etcd:/etcd-data
+    restart: always
