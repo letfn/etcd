@@ -15,7 +15,6 @@ services:
       - http://0.0.0.0:2379
       - --initial-cluster
       - default=http://${ETCD_IP}:2380
-      - --logger=zap
     env_file: .env
     network_mode: host
     volumes:
